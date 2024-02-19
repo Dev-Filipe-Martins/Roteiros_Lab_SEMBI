@@ -156,3 +156,25 @@ Armazena a sequencia de instruções para excecutar um progrmama.
     arm-none-eabi-objdump -s -j .data main.o
     arm-none-eabi-gcc -mcpu-cortex-m4 -mthumb -c -O0 -Wall main.c
     
+----
+
+## Lab 03:
+Continuação Piscar Led. \
+O que acontece antes da main \
+Startup: Inicialização \
+As primeiras 16 posições de memoria do cortex-m4 devem ser reservadas do 0 ao 8C \
+Memoria não volatil (flash) \
+No inicio: \
+.ISR_VECTORS 0x0800 0000 \
+.TEXT \
+.DATA \
+.RODATA \
+
+----
+
+## Lab 04:
+Continuação Piscar Led. \
+Arquivo main.c e startup.c estão na pasta Lab 02 do linux \
+Criação do arquivo Makefile
+
+    arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb -O0 -Wall startup.c -o startup.o
