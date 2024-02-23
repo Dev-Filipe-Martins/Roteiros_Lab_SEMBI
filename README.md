@@ -72,6 +72,34 @@ Nomeia o arquivo
 Compila sem linkar. Apenas gera o arquivo objetor .o
 
     -c
+Especificar  a arquitetura  ARM Cortex-M4
+
+    -mcpu=cortex-m4
+
+Alguns processadores ARM podem executar dois conjuntos de instruções distintos,
+o conjunto de instruções ARM tradicional de 32-bits (por padrão) e um conjunto de instruções
+reduzido de 16-bits denominado Thumb.\
+Os processadores ARM Cortex-M suportam apenas o conjunto de instruções Thumb.\
+Por padrão o compilador irá gerar o código utilizando o conjunto de instruções ARM. Para alterar este comportamento devemos utilizar a opção:
+    
+    -mthumb
+
+Solicitar ao compilador para gerar informações de *debug:
+
+    -g
+
+Desabilitar as otimizaçõe:
+
+    -O0
+
+Ligar todos os *warnings a respeito de códigos que podem ser considerados questionáveis e que são de fácil detecção:
+
+    -Wall
+
+Para compilar o arquivo main.c:
+
+    foo@bar$ arm-none-eabi-gcc -c -g -mcpu=cortex-m4 -mthumb -O0 -Wall main.c -o main.o
+
 Exemplo:
 
     nano main.c
