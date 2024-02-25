@@ -105,7 +105,14 @@ Exemplo:
     nano main.c
     gcc main.c
 
-    
+Para gerar como resultado do pré-processamento a lista de dependências de um determinado arquivo.:
+
+    -M
+
+Exemplo:
+
+    arm-none-eabi-gcc -M main.c
+
 ### No editor de texto:
 Criando a função main:
 
