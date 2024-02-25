@@ -113,6 +113,30 @@ Exemplo:
 
     arm-none-eabi-gcc -M main.c
 
+Para gerar uma lista de depedências contendo apenas arquivos do usário, sem adicionar aquivos cabeçalhos do sistema mencionados direta ou indiretamente:
+
+    -MM
+
+Exemplo:
+
+    arm-none-eabi-gcc -MM main.c
+
+Para salvar a lista de depedências gerada pelo GCC em um arquivo:
+
+    -MF
+
+Exemplo:
+
+    arm-none-eabi-gcc -MM -MF .deps/main.d main.c
+
+O comando abaixo gera um arquivo contendo a lista de depedências ao invés de compilar o arquivo fonte.
+
+    cat .deps/main.d
+
+Para gerar a lista de depedências como subproduto do processo de compilação:
+
+    -MMD
+
 ### No editor de texto:
 Criando a função main:
 
