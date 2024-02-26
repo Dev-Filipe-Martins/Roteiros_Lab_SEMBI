@@ -28,15 +28,27 @@
 ### Sobre a região de memória stack (pilha) responda:
 #### (A) O que é, e em que situação a stack é utilizada?
 
+  A memória stack ou pilha é uma estrutura de dados LIFO (Last-in First-out) que armazena dados temporários e informaçoes de contexto relacionados a execução de funçoes e métodos em um programa. Os dados na stack podem ser acessados através do stack pointer. A stack armazena as variáveis locais de funçoes e informaçoes de contexto, como o endereço de retorno da função e o valor do stack ponter antes da chamada da função.
+  
+  A stack é utilizada para armazenar o estado de cada chamada recursiva em uma função. Também armazena os operandos e operadores durante a avaliação de expressoes aritmeticas. É utilizada para gerenciar a alocação e desalocaçao de memoria dinamica.
+
 #### (B) A qual tipo de memória a stack está relacionada?
+
+  Está relacionada a memória volátil (RAM) que permite leitura e escrita de dados, ela armazena dados que precisam ser sacessados rapidamente, como variáveis locais, parametros de funçoes e informaçoes de contexto. A memória volátil perde seus dados quando a energia é desligada, logo a stack precisa ser reinicializada a cada vez que o programa é executado.
 
 #### (C) Qual o registro do Cortex M faz o controle de pilha e qual a diferença entre MSP e PSP?
 
-  MSP (main stack pointer)
+  O Stack Pointer (SP) também conhecido como R13 é quem faz o controle da pilha. Ele armazena o endereço da última celula utilizada na pilha, indica a próxima celula disponivel para alocação na pilha. É incrementado quando há empilhamento (push) e decrementado quando há desempilhamento (pop).
 
-  PSP (process stack ponter)
+  MSP (main stack pointer) é o ponteiro principal, usado por padrão para o modo de thread e interrupções, é mais eficiente para tarefas curtas, pois não requera troca de contexto entre diferentes tarefas.
+
+  PSP (process stack ponter) é o ponteiro de processo, usado para o modo handler, usado para executar tarefas em um sistema multitarefa. Cada tarefa tem seu próprio PSP, que é usado para armazenar o contexto de tarefa. O PSP pode ser mais eficiente para tarefas longas, pois permite que o sistema operacional otimize o uso da memória. Porém é mais complexo de usar.
 
 #### (D) Como a pilha cresce e diminui durante a execução de um programa?
+
+  A pilha cresce quando uma função é chamada, ela armazena o contexto da função, inclui o valor do SP, as variáveis locais da função e os parametros da função. A instrução push coloca um valor na pilha incrementando o SP.
+
+  A pilha diminui quando uma função termina, removendo o contexto da função, liberando a memória utilizada. A instrução pop remove um valor da pilha, decrementando o SP.
 
 #### (E) Cite pelo menos duas situações em que um estouro de pilha pode ocorrer. Ilustre estas situações apresentando trecho de código escrito em linguagem C.
 
