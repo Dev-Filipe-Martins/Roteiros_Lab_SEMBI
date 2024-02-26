@@ -237,3 +237,9 @@ Arquivo main.c e startup.c estão na pasta Lab 02 do linux \
 Criação do arquivo Makefile
 
     arm-none-eabi-gcc -c -mcpu=cortex-m4 -mthumb -O0 -Wall startup.c -o startup.o
+
+## Lab 05:
+
+RCC (reset and clock control): periférico que configura o clock, liga desliga o microcontrolador.
+periférico chave: usa o tempo inteiro.
+
