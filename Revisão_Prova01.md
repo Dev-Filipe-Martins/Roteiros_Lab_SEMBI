@@ -52,22 +52,108 @@
 
 #### (E) Cite pelo menos duas situações em que um estouro de pilha pode ocorrer. Ilustre estas situações apresentando trecho de código escrito em linguagem C.
 
+  O estouro de pilha (stack overflow) ocorre quando a pilha cresce além do seu tamanho limite. 
+  
+  Isso pode ocorrer por meio de uma recursão infinita, onde uma função recursiva nunca termina e consome toda a memória disponivel na pilha, levando a um estouro.
+
+    void funcao(int n) {
+      if (n > 0) {
+        funcao(n - 1);
+      }
+    }
+    
+    int main() {
+      funcao(10000);
+      return 0;
+    }
+
+  Alocar muitas variáveis na pilha, especialmente grandes arrays ou estruturas, pode consumir toda a memória disponível.
+
+    int main() {
+      int array[1000000]; // Alocação de um array grande
+      // ...
+    }
+
+  Passar grandes arrays ou estruturas como parametros para funções pode consumir muita memória na pilha.
+
+    void funcao(int array[1000000]) {
+      // ...
+    }
+    
+    int main() {
+      int array[1000000];
+      funcao(array);
+      return 0;
+    }
+
+  Erros no código, como loops infinitos ou acessos inválidos a memória, podem levar a um estouro de pilha.
+
+    int main() {
+      int *ptr = NULL;
+      *ptr = 10; // Acesso inválido à memória
+      return 0;
+    }
+
+  O processamento de interrupções pode consumir memória na pilha, especialmente se as interrupções forem frequentes ou complexas.
+
+    void ISR_Handler() {
+      // ...
+      // Alocação de memória na pilha durante a interrupção
+      // ...
+    }
+    
+    int main() {
+      // ...
+    }
+
+  Em sistemas multitarefa, cada tarefa pode ter sua próprio pilha. Se uma tarefa consumir muita memória na pilha, pode ocorrer um estouro.
+
 
 ### Como o periférico NVIC prioriza as exceções? Descreva o mecanismo detalhadamente considerando um processador com 16 níveis de prioridade, explique também sobre o que são as interrupções não mascaraveis e como são usadas no Cortex M.
 
+  O NVIC prioriza as exceções usando um esquema de prioridade programável. Cada fonte de interrupçõa tem um nível de prioridade associado, que determina qual interrupção será atendida primeiro em caso de múltiplas interrupções simulâneas.
+
+  Para um processador com 16 níveis de prioridade, o nível de prioridade 0 é o mais baixo, enquanto o 15 é o mais alto. As fontes de interrupção com prioridade mais alta serão atendidas antes das fontes de interrupção com baixa prioridade.
+
+  As interrupções não mascaráveis (NMI - non-maskable interrupt) são eventos de alta prioridade que não podem ser desabilitadas por software. Elas são usadas para lidar com eventos críticos que exigem atenção imediata do processador.
+
+  A NMI tem o nível de prioridade mais alto no sistema, superior a todas as interrupções mascaráveis. Ou seja, não podem ser mascaradas por software e sempre serão atendidas pelo processador, mesmo que as interrupções estejam desabilitadas.
+
+  As NMI são utilizadas para lidar com situações criticas que exigem atenção imediata do processador, como falhas de hardware (erros de memória, falhas de clock, etc), detecção de intrusão, violações de acesso à memória e timeout do watchdog.
+
 ### Complete o Trecho do codigo disponibilizado abaixo de tal forma que ao final de sua execução a fonte de clock HSE(High Speed External) esteja habilitada e pronta para ser utilizada.
 
+  Passo 1: Configurar os pinos do cristal HSE.
+  Pinos PH0-OSC_IN e PH1-OSC_OUT
+
+  Configurar os pinos como GPIO e configurar como entrada
+
+  Passo 2: habilitar o clock HSE no RCC.
+  Acessar o registrador RCC_CR (RCC - Clock control Register)
+  Definir HSEON para 1
+  Aguardar até que HSERDY esteja definido para 1, indicando que o clock HSE está estabilizado.
+
+  Passo 3: Selecionar o clock HSE como clock do sistema
+  Acessar o registrador RCC_CGFR
+  Definir o campo SW para 1, selecionando o clock HSE como clock do sistema.
+
+  
   Código:
 
     void stm32_clockconfig(void)
     {
 
-    /* habilita HSE Clock( RCC CR*/
+      /* Habilita HSE Clock( RCC CR )*/
+      RCC_CR |= RCC_CR_HSEON;
 
 
 
+      /* aguarda HSE ficar pronta */
+      while ((RCC_CR & RCC_CR_HSERDY) == 0);
 
-    /* aguarda HSE ficar pronta */
+      // Selecionar o clock HSE como clock do sistema
+      RCC->CFGR &= ~RCC_CFGR_SW;
+      RCC->CFGR |= RCC_CFGR_SW_HSE;
 
 
     }
