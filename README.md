@@ -243,3 +243,9 @@ Criação do arquivo Makefile
 RCC (reset and clock control): periférico que configura o clock, liga desliga o microcontrolador.
 periférico chave: usa o tempo inteiro.
 
+## Lab 06: 
+
+Finalizar programa para piscar LED. 
+
+Pelo esquemático o transistor N-MOS aberto acende o LED (Modo push-pull) ou (Open drain).
+
