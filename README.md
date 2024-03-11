@@ -249,3 +249,11 @@ Finalizar programa para piscar LED.
 
 Pelo esquemático o transistor N-MOS aberto acende o LED (Modo push-pull) ou (Open drain).
 
+## Lab 07:
+
+Utilizaremos Cube IDE para piscar Led
+
+
+
+
+
