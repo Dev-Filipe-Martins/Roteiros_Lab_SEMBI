@@ -1,6 +1,16 @@
 # Roteiros Lab SEMBI
 Roteiros das Aulas Práticas de Sistemas Embarcados I
 
+## Referências
+
+[1] [STM32F411xC Datasheet](https://www.st.com/resource/en/datasheet/stm32f411ce.pdf)
+
+[2] [RM0383 Reference Manual](https://www.st.com/resource/en/reference_manual/rm0383-stm32f411xce-advanced-armbased-32bit-mcus-stmicroelectronics.pdf)
+
+[3] [Using the GNU Compiler Collection (GCC)](https://gcc.gnu.org/onlinedocs/gcc/index.html)
+
+[4] [GNU Make](https://www.gnu.org/software/make/manual/html_node/index.html)
+
 ## Lab 01:
 * Instalação do Ubuntu 20.04 no Windows Subsystem for Linux 2 (WSL2)\
 https://github.com/daniel-p-carvalho/ufu-semb1-lab-01/blob/master/Instala%C3%A7%C3%A3o%20WSL.md
