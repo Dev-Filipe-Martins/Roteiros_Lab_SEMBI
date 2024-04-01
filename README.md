@@ -261,6 +261,15 @@ Pelo esquemático o transistor N-MOS aberto acende o LED (Modo push-pull) ou (Op
 
 ## Lab 07:
 
+## Lab 08:
+
+Desacoplar o software da ST na Hall
+
+Operador ternário -> ? = if
+
+
+
+
 Utilizaremos Cube IDE para piscar Led
 
 
