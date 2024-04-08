@@ -267,6 +267,21 @@ Desacoplar o software da ST na Hall
 
 Operador ternário -> ? = if
 
+Alteramos o duty cycle do pwm durante o tempo, com determinada frequencia o pwm vai crescendo.
+
+
+
+## Lab 09:
+
+Boucing = repique
+
+deboucing vai ser questão de prova
+
+Para resolver esse problema, utiliza-se filtro
+
+Por software, para ignorar o bouncing ou ruido é ignorar o ruido por meio do código (cortar o periodo de tempo do ruido)
+
+ou utilizando um delay
 
 
 
