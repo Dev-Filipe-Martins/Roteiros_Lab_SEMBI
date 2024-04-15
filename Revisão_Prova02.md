@@ -1,15 +1,3 @@
-### Sobre a região de memória stack(pilha) responda:
-#### a) O que é e em que situação a stack é utilizada?
-
-#### b) A qual tipo de memória a stack está relacionada?
-
-#### c) Qual o registro do Cortex M faz o controle da pilha e qual a diferença entre MSP e PSP(main stack pointer e process stack pointer)?
-
-#### d) Como a pilha cresce e diminui durante a execução de um programa?
-
-#### e) Cite pelo menos duas situações em que um estouro de pilha pode ocorrer. Ilustre estas situações apresentado trecho de codigo escrito em linguagem C
-
-
 ### Complete o Trecho do codigo disponibilizado abaixo de tal forma que ao final de sua execução a fonte de clock HSE(High Speed External) esteja habilitada e pronta para ser utilizada.
 
 Código:
@@ -200,4 +188,17 @@ OBS: Considere que todas as confirmações do I2C (ACK) foram positivas (sem err
 
 
 ### Estudar Debouncing (Matérial no Teams)
+
+    //funcao de interrupcao com debouncing
+    void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+    	if(GPIO_Pin == INFR_Pin){
+    
+    		static uint32_t debouncing_ms = 0;
+    		if((HAL_GetTick() - debouncing_ms) >= DEBOUNCING){
+    			nmoedas++;
+    			debouncing_ms = HAL_GetTick();
+    		}
+    	}
+    }
+
 
