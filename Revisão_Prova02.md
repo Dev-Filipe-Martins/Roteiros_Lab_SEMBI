@@ -55,24 +55,24 @@ Código:
 Em geral, o microcontrolador STM32F411CE possui duas fontes principais de clock: O clock interno e externo. Ambas as fontes são divididas em alta e baixa velocidade.
 
 HSE (High Speed External) -> Fonte de clock de alta velocidade externa.
-A frequencia é definida por crital externo (entre 8 e 32 MHz)
-Tem maior precisão
-Maior custo (cristal externo) e maior consumo de energia
+- A frequencia é definida por crital externo (entre 8 e 32 MHz)
+- Tem maior precisão
+- Maior custo (cristal externo) e maior consumo de energia
 
 HSI (High Speed Internal) -> Fonte de clock de alta velocidade interna.
-Frequencia entre 8 e 16 MHz
-Baixo consumo de energia, disponível em todos os STM32
-Baixa precisão e sensível a ruídos e temperatura
+- Frequencia entre 8 e 16 MHz
+- Baixo consumo de energia, disponível em todos os STM32
+- Baixa precisão e sensível a ruídos e temperatura
 
 LSE (Low Speed External) -> Fonte de clock de baixa velocidade externa.
-Frequencia definida por cristal externo 32 KHz
-Baixo consumo de energia e alta precisão
-Maior custo (cristal externo) e frequencia fixa
+- Frequencia definida por cristal externo 32 KHz
+- Baixo consumo de energia e alta precisão
+- Maior custo (cristal externo) e frequencia fixa
 
 LSI (Low Speed Internal) -> Fonte de clock de baixa velocidade interna.
-Frequencia em KHz
-Baixo consumo de energia
-Baixa precisão
+- Frequencia em KHz
+- Baixo consumo de energia
+- Baixa precisão
 
 #### b) Qual é o objetivo do módulo de geração de clock PLL? Quais são as vantagens de se ter um PLL integrado ao microcontrolador?
 
@@ -139,40 +139,36 @@ Observações:
     }
 
 
-    
 
 
-
-
-### No Anexo IV são apresentados os ciclos de escrita e leitura de byte de uma memória EEPROM modelo 24CS512 que utiliza o barramento I2C para se comunicar com o mestre. Essa memória possui 512 kbits organizados em 65536 palavras de 8bits (D0 a D7), exigindo, dessa forma, um endereço de acesso de 16 bits (A0 a A15, word address bytes 1 e 2). Outra característica dessa memória é permitir que parte do seu endereço I2C seja personalizado através de 3 pinos, representados pelos valores A2, A1 e A0 na fase de endereçamento do escravo (device address byte, não confundir com o endereço de memória descrito anteriormente). A figura abaixo apresenta o diagrama esquemáttico da conxão da memória com o microcontrolador. Além disso, também são detalhadas as funções de cada pino da memória.
-### Considerando as informações disponibilizadas no Anexo IV e o diagrama esquemático apresentado faça:
-
-#### a) Complete o diagrama abaixo, indicando os valores dos bits na imagem, de forma que no ciclo de escrita seja gravado o valor 0xAB no endereço 0x89AB.
-
-#### b) Complete o diagrama abaixo, indicando os valores dos bits na imagem, de forma que no ciclo de leitura, seja lido o conteúdo do endereço 0x89AB
-OBS: Considere que todas as confirmações do I2C (ACK) foram positivas (sem erro)
-
-
-
+- ## Questão de Debouncing
 
 ### Estudar Debouncing (Matérial no Teams)
 
-    //funcao de interrupcao com debouncing
-    void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
-    	if(GPIO_Pin == INFR_Pin){
-    
-    		static uint32_t debouncing_ms = 0;
-    		if((HAL_GetTick() - debouncing_ms) >= DEBOUNCING){
-    			nmoedas++;
-    			debouncing_ms = HAL_GetTick();
-    		}
-    	}
-    }
+O termo "debouncing" refere-se a um problema comum em sistemas eletrônicos que envolvem botões ou interruptores mecânicos. Quando um botão é pressionado ou liberado, pode haver um breve período de tempo durante o qual o contato físico oscila rapidamente entre os estados aberto e fechado. Esse "rebote" pode resultar em múltiplos pulsos elétricos sendo registrados em vez de apenas um, o que pode causar comportamento errático em sistemas que respondem aos eventos de pressionar ou liberar o botão.
 
+Para lidar com o problema de bouncing, é comum utilizar uma técnica chamada "debouncing", que consiste em filtrar essas oscilações e garantir que apenas uma transição válida de estado seja registrada. Isso geralmente é feito de duas maneiras:
 
+Hardware Debouncing:
 
+- Utiliza componentes como capacitores e resistores para criar um circuito que filtra o bouncing eletrico.
 
-- Questão de Debouncing
+Software Debouncing:
+
+- Implementar algoritmos que detectam e filtram o bouncing. Isso é feito geralmente mantendo um registro do estado do botão ao longo do tempo e apenas registrando uma mudança de estado após um período de estabilidade.
+
+        //funcao de interrupcao com debouncing
+        void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
+        	if(GPIO_Pin == INFR_Pin){
+        
+        		static uint32_t debouncing_ms = 0;
+        		if((HAL_GetTick() - debouncing_ms) >= DEBOUNCING){
+        			nmoedas++;
+        			debouncing_ms = HAL_GetTick();
+        		}
+        	}
+        }
+
 
 - ## Questão de Periférico
   - ## I2c
