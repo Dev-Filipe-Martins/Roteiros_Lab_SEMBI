@@ -147,13 +147,6 @@ Observações:
 
 ### Utilizando como referencia os códigos das listagens fornecidas em anexo. Implemente, utilizando linguagem C, a função stm32_gpio_write(uint32_t pinset, bool value).
 
-        void stm32_gpio_write (uint32_t pinset, bool value)
-        {
-
-
-        
-        }
-
         #include "stm32f4xx_hal.h"
 
         void stm32_gpio_write(uint32_t pinset, bool value) 
